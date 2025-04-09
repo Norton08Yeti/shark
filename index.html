@@ -1,0 +1,498 @@
+
+<html>
+<title>Cápák és kategóriájuk</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+  height: 140%;
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+#Home {background-color: red;}
+#News {background-color: green;}
+#Contact {background-color: blue;}
+#About {background-color: orange;}
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+</style>
+
+<style>
+.container {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Make the container take up the full width */
+}
+
+.image-container {
+  position: relative;
+  width: 1000px; /* Increased the width of the image container */
+}
+
+.image {
+  display: block;
+  width: 100%; /* Make the image take up the full width of the container */
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: grey;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: 0.5s ease;
+}
+
+.container:hover .overlay {
+  height: 100%;
+}
+
+.text {
+  color: white;
+  font-size: 40px; /* Increase the font size of the text */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.text-container {
+  margin-left: 30px; /* Space between the image and the text */
+}
+</style>
+
+</head>
+<body>
+
+<button class="tablink" onclick="openPage('Home', this, 'red')"id="defaultOpen">Kezdőlap</button>
+<button class="tablink" onclick="openPage('News', this, 'green')">Kistestű</button>
+<button class="tablink" onclick="openPage('Contact', this, 'blue')">Átlagos</button>
+<button class="tablink" onclick="openPage('About', this, 'orange')">Nagytestű</button>
+
+<div id="Home" class="tabcontent">
+  <h3>Alapinformációk az oldalról:</h3>
+  <p>-Ez az oldal a különböző cápafajok méret általi besorolásában segít és mindeggyik cápafajról amelyik megtalálható az oldalon egy kis extra információt is megtudhatsz.(ennél sokkal több cápafaj is létezik de itt nem mutattam be sz összeseset csak is az ismertebbeket)</p>
+  
+<br>
+<h2>Itt rá tudsz keresni cápákra amit meg akarsz találni (arra az oldalra dob ahol megtalálható)</h2>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Kereső">
+
+<ul id="myUL">
+	<li><a href="#"onclick="openPage('About', this, 'white')">Óriás cápa</a></li>
+	<li><a href="#"onclick="openPage('About', this, 'white')">Cet cápa</a></li>
+	<li><a href="#"onclick="openPage('About', this, 'white')">Nagy Fehér cápa</a></li>
+	<li><a href="#"onclick="openPage('About', this, 'white')">Tigris cápa</a></li>
+	<li><a href="#"onclick="openPage('About', this, 'white')">Pöröly cápa</a></li>
+	
+	<li><a href="#"onclick="openPage('Contact', this, 'white')">Bika cápa</a></li>
+	<li><a href="#"onclick="openPage('Contact', this, 'white')">Homoki Tigris cápa</a></li>
+	<li><a href="#"onclick="openPage('Contact', this, 'white')">Citrom cápa</a></li>
+	<li><a href="#"onclick="openPage('Contact', this, 'white')">Szürke szirticápa</a></li>
+	<li><a href="#"onclick="openPage('Contact', this, 'white')">Fehérfoltú szirticápa</a></li>
+
+	<li><a href="#" onclick="openPage('News', this, 'white')">Kék cápa</a></li>
+	<li><a href="#" onclick="openPage('News', this, 'white')">Nővér cápa</a></li>
+	<li><a href="#" onclick="openPage('News', this, 'white')">Süti cápa</a></li>
+	<li><a href="#" onclick="openPage('News', this, 'white')">Macska cápa</a></li>
+	<li><a href="#" onclick="openPage('News', this, 'white')">Törpe kutyacápa</a></li>
+</ul>
+
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</div>
+
+
+
+<!-- Kistestű --!>
+<div id="News" class="tabcontent">
+  <h1><center>Kistestű cápafajok:</center></h1>
+  <p></p> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<br>
+<br>
+
+<!-- Macskacápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Macskacápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Macskacápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Macskacápa</h3>
+    <p>Macskacápa Átlagos testhossza 1,8 méter. A macskacápák mindenevők, és étrendjük nagyon változatos. Elsősorban halakkal, rájákkal, és kisebb tengeri emlősökkel táplálkoznak.A macskacápák híresek a gyorsaságukról és kitartásukról, ami kiváló ragadozóvá teszi őket. Különösen nagy előnyük van a szaglásukban, amellyel több kilométerről is képesek észlelni a vérszagot a vízben.</p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Törpekutyacápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Törpekutycápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Törpekutyacápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Törpekutycápa</h3>
+    <p> A törpekutyacápa általában 0,6 és 1 méter közötti hosszúságra nő, de vannak kisebb egyedek is, amelyek akár 0,5 méteresek is lehetnek.A felnőtt törpekutyacápák súlya nem haladja meg az 5 kilogrammot.A törpekutyacápa a cápák egyik legkisebb faja, és jellemzően a sekély, homokos vagy iszapos tengerfenéken él, 20-200 méter közötti mélységben.A törpekutyacápa elsősorban kis halakkal, rákokkal, puhatestűekkel és kisebb gerinctelenekkel táplálkozik.</p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Süticápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Süticáp.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Süticápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Süticápa</h3>
+    <p>A Süti cápa általában 40-50 cm hosszúra nő, de néhány példány elérheti akár a 60 cm-t is.A súlya jellemzően 2-4 kg között mozog.Az egyik legérdekesebb jellemzője ennek a cápának, hogy a harapása különösen "kör alakú", mintha egy sütemény kivágót használnának. A cápa olyan éles fogaival képes kis kört kivágni a célpontjából. Ezt a táplálkozási szokást, amely más állatok testéről való szövetek eltávolítására szolgál, gyakran megfigyelik bálnák, delfinek és más tengeri állatok bőrén.</p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Nővércápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Nővércápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Nővércápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Nővércápa</h3>
+    <p> A Nővércápa átlagosan 2,5–3,5 méter hosszúra nő, de egyes példányok akár 4 méteres hosszúságot is elérhetnek. A súlya általában 70–100 kg között mozog, bár a legnagyobb egyedek elérhetik a 150 kg-ot is.A nurse cápa (vagy Ginglymostoma cirratum) egy érdekes és viszonylag nyugodt természetű cápafaj, amely az óceánok trópusi és szubtrópusi vizeiben él. Bár megjelenése és viselkedése eltér a nagyobb ragadozó cápáktól. </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Kékcápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Kékcápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Kékcápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Kékcápa</h3>
+    <p> A kék cápa átlagosan 2,5-3 méter hosszúra nő, de egyes példányok akár 4 méteres hosszúságot is elérhetnek.A kék cápa súlya jellemzően 100-200 kg között mozog, de a legnagyobb példányok elérhetik a 300 kg-ot is.A kék cápa az egyik leggyorsabb cápa a világon. Képes akár 60 km/h sebességgel is úszni, amit a vízben való mozgás során való rendkívüli aerodinamikai formájának köszönhet. Ez az adottság segíti őt a gyors zsákmány felkutatásában.</p>
+  </div>
+</div>
+</div>
+
+
+<!-- Átlagtestű --!>
+<div id="Contact" class="tabcontent">
+  <h1><center>Átlagos vagy közepes méretű cápafajok:</center></h1>
+  <p></p>
+  
+<!-- Bikacápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Bikacápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Bikacápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Bikacápa</h3>
+    <p>A bikacápa átlagosan 3-3,5 méter hosszúra nő, de egyes példányok akár 4-4,5 méterre is megnőhetnek. A súlya jellemzően 100–230 kg között mozog, de a legnagyobb példányok elérhetik a 300 kg-ot is. A bikacápa az egyetlen cápafaj, amely képes alkalmazkodni az édesvízi környezethez. Egyes bikacápák több száz kilométert is megtesznek édesvízi környezetben, például folyókban és tavakban, míg más fajok a part menti területeken élnek. A legnagyobb példányokat gyakran olyan helyeken találják, mint az Amazonas, a Zambezi folyó és az Indus folyó deltája.</p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Citromcápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Citromcápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Citromcápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Citromcápa</h3>
+    <p> A citromcápa átlagosan 2,5–3,5 méter hosszúra nő, de egyes példányok akár 3,8 méteres hosszúságot is elérhetnek.A súlya jellemzően 150–200 kg között mozog, de a legnagyobb egyedek akár 250 kg-ra is megnövekedhetnek.A citromcápa jellegzetes világos sárgásbarna színét elsősorban a tengerfenéken való rejtőzködés segíti. A szín, amely a homokos és iszapos aljzatokhoz hasonlít, tökéletes álcázást biztosít számára, hogy könnyen észrevétlenül közlekedhessen a tengerfenéken. </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Fehérfoltúszirticápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Fehérfoltúszirticápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Fehérfoltúszirticápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Fehérfoltúszirticápa</h3>
+    <p>A fehérfoltú szirticápák átlagosan 2-2,5 méter hosszúak, de elérhetik a 3 méteres hosszt is.A fehérfoltú szirticápa súlya jellemzően 150-180 kg körül mozog, de a nagyobb példányok akár 210-250 kg-ra is megnövekedhetnek. Fehér foltok és álcázás: A cápa színe és fehér foltjai segítenek abban, hogy a cápa beleolvadjon a színes korallzátonyok és az aljzaton lévő homok vagy iszap színébe. </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Homokitigriscápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Homokitigriscápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Homokitigriscápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Homokitigriscápa</h3>
+    <p>A homoki tigriscápa átlagosan 2,2–2,5 méter hosszú, a nőstények általában nagyobbak, akár 3,2 méter hosszúságot is elérhetnek. A súlyuk jellemzően 90–150 kg között mozog. A homoki tigriscápák szociális lények, és csoportokban élnek. A csoportosulásokat hasznossági elv alapján alakítják, vagyis addig maradnak együtt, amíg minden egyed számára előnyös a közösség. Ha egy egyed nem találja meg a helyét a csoportban, kiválik, mielőtt a csoport feloszlana.  </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Szürkeszirticápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Szürkeszirticápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Szürkeszirticápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Szürkeszirticápa</h3>
+    <p>A szürke szirtcápa átlagosan 2,5-3 méter hosszúra nő.A súlya körülbelül 130–180 kg de akár 210-240kg is lehet egy példány.Ezek a cápák ismerték megfigyelhető szociális viselkedésükről, és gyakran kisebb csoportokban mozognak. Az emberi jelenlét azonban megváltoztathatja viselkedésüket; kutatások szerint az ember közelsége miatt óvatosabbá válnak a part menti vizekben </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+
+</div>
+
+
+<!-- Nagytestű --!>
+<div id="About" class="tabcontent">
+  <h1><center>Nagytestű cápafajok:</center></h1>
+  <p></p>
+  
+<br>
+<br>
+
+<!-- Óriáscápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Óriáscápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Óriáscápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Óriáscápa</h3>
+    <p> Az óriáscápa átlagosan 7–10 méter hosszúra nő, de egyes példányok elérhetik a 12–15 méteres hosszúságot is.A súlya átlagosan 2–4 tonna, de a legnagyobb egyedek akár 5 tonnát is nyomhatnak.Bár hatalmas mérete ellenére az óriáscápa nem jelent közvetlen veszélyt az emberre, mivel nem húsevő, hanem plankton-szűrögető életmódot folytat. Amikor táplálkozik, kitátja hatalmas száját, és a beáramló vízből a kopoltyúrésein található fésűszerű szervek segítségével szűri ki a planktonokat. Az óriáscápa a hidegebb vizekben, különösen az Atlanti-óceán északi részén, a Csendes-óceán északi vizeiben és a Földközi-tengerben fordul elő. </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Cetcápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Cetcápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Cetcápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Cetcápa</h3>
+    <p>A Cetcápa átlagosan 10-12 méteresre nőnek de nem kizárt hogy vnnak nagyobb példányok például 13-15 méteresek is. A Cetcápa megközelítőleg 60-70 tonna között mozognak súlyban. A bálnacápák az óceánok legnagyobb szűrői. A száját hatalmasra nyitják, miközben a vízben úsznak, és a víz áramlása a szűrőkön keresztül engedi át a táplálékot, mint például fitoplanktont és zooplanktont. A bálnacápa életciklusa meglehetősen lassú, és évtizedekig is elélhetnek. Néhány bálnacápa példány akár 70-100 évig is élhet.   </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Nagyfehércápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Nagyfehércápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Nagyfehércápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Nagyfehércápa</h3>
+    <p> A nagyfehér cápák általában 4-6 méter hosszúak, de egyes példányok elérhetik a 7 méteres hosszt is, és ezek a legnagyobb egyedek. A nagyfehér cápák általában 4-6 méter hosszúak, de egyes példányok elérhetik a 7 méteres hosszt is, és ezek a legnagyobb egyedek.A nagyfehér cápáknak viszonylag nagy agyuk van, ami azt jelenti, hogy rendkívül intelligens ragadozók. Kiválóan képesek az ösztöneikre és a környezetükre reagálni.A nagyfehér cápa a tenger legnagyobb ragadozó halának számít. Ezen kívül ő az egyik legnagyobb tengeri ragadozó, és az óceán csúcsragadozója.  </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Pörölycápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Pörölycápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Pörölycápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Pörölycápa</h3>
+    <p> A pörölycápák többféle fajtája létezik, és méretük változhat. A legnagyobb pörölycápa, a nagy pörölycápa (Sphyrna mokarran), akár 6 méter hosszúra is megnőhet, míg a kisebb fajok, mint a kisebb pörölycápa (Sphyrna tiburo), általában 1,5-2 méter hosszúak.A nagyobb pörölycápák súlya akár 500 kg is lehet, de a kisebbek ennél jóval könnyebbek. A pörölycápák egyik legszembetűnőbb jellemzője a fejük formája, amely széles és lapos, hasonlít egy pörölyre. Ez az anatómiai felépítés lehetővé teszi számukra, hogy jobb látóteret biztosítson és pontosabban érzékelje a környezetét. </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+<!-- Tigriscápa --!>
+<div class="container" style="display: flex; align-items: center;">
+  <div class="image-container" style="position: relative; width: 1000px;">
+    <img src="Tigriscápa.jpg" alt="Macskacápa" class="image" style="width: 100%; height: auto;">
+    <div class="overlay">
+      <div class="text">Tigriscápa</div>
+    </div>
+  </div>
+  <div class="text-container" style="margin-left: 20px;">
+    <h3>Tigriscápa</h3>
+    <p> A tigriscápa általában 3,25–4 méter hosszú, de elérhetik a 5 métert is. A legnagyobb példányok akár 500–700 kg-t is nyomhatnak. Jellegzetes szürke vagy zöldes színű, és a testén sötétebb csíkok vagy foltok találhatók, amelyek a „tigris” névhez vezethettek. A tigriscápát a tengerek kecskélyének is neezik ugyanis mayldnem hogy mindent képs elfogyasztani példul volt már rá példa hogy egy egész lovagi páncélt találtak egy már halott egyed gyomrában </p>
+  </div>
+</div>
+
+<br>
+<br>
+
+</div>
+
+
+
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+</body>
+</html> 
